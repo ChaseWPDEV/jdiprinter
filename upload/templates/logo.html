@@ -1,0 +1,13 @@
+
+
+<h1>Set Company Logo</h1>
+
+<form method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<p>
+	{{form}}
+	</p>
+	<input type="submit" value="Submit">
+</form>
+
+<a href="/settings/">Modify Settings</a><br>

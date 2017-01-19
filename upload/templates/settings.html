@@ -1,0 +1,16 @@
+<form method="post">
+{% csrf_token %}
+<table>
+{{ form.as_table }}
+</table>
+<input type="submit" value="Save" style="margin: 25px 0 0 175px;">
+</form>
+
+{% if logo.image %}
+	<p>
+	<h2>Office Logo</h2>
+	<img src="{{ logo.image.url }}?dummy={{ rand }}" style="max-width:150px;">
+	</p>
+{% endif %}
+
+<a href="/logo/">Set Office Logo</a><br>
