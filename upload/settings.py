@@ -39,6 +39,8 @@ class SettingsForm(forms.Form):
 
 		#set form fields to match current entry in the model		
 		for stg in settings:
+			if stg.setting_key not in self.dicom_fields:
+				continue
 			self.fields[stg.setting_key]=forms.BooleanField(initial=stg.enabled,
 					label=SettingsForm.dicom_fields[stg.setting_key], 
 					required=False)
