@@ -10,10 +10,15 @@ class SettingsForm(forms.Form):
 	#dictionary with dicom file attributes:readable label
 
 	dicom_fields={'PatientName':'Patient Name',
-			'PatientAge':'Patient Age',
-			'ProtocolName':'Protocol',
-			'RequestingPhysician':'Physician',
+			'ProtocolName':'Protocol/Contrast',
+			'ReferringPhysiciansName':'Physician',
 			'RequestedProcedureDescription':'Procedure Descritpion',
+			'StudyDate': 'Study date',
+			'StudyID': 'Study ID',
+			'PatientID': 'Patient ID',
+			'AccessionNumber': 'Accession #',
+			'InstitutionName': 'Institution Name',
+			'StudyDescription': 'Study Desc.'
 			}
 	
 	def __init__(self, *args, **kwargs):

@@ -17,6 +17,7 @@ class LabelFactory():
 	filepath="/var/www/html/media/"
 	filename="output.png"
 	binname="output.bin"
+	no_print=['Patient Name']
 
 	def make_logo_label(self):
 		if ImageLogo.objects.filter(zero=0).count()==0:
@@ -48,7 +49,11 @@ class LabelFactory():
 		i=0
 		draw=ImageDraw.Draw(im)
 		for k in text:
-			draw.text((0,i),k[0]+":"+k[1],"black",font=font)
+			line=''
+			if k[0] not in self.no_print:
+				line+=k[0]+':'
+			line+=k[1]
+			draw.text((0,i),line,"black",font=font)
 			i+=self.fontsize
 	
 		fullpath=self.filepath+self.filename
