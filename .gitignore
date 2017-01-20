@@ -1,7 +1,2 @@
-upload/__pycache__/dchandler.cpython-35.pyc
-upload/__pycache__/settings.cpython-35.pyc
-upload/tests/__pycache__/__init__.cpython-35.pyc
-upload/tests/__pycache__/testdcupload.cpython-35.pyc
-upload/tests/__pycache__/testgetfields.cpython-35.pyc
-upload/tests/__pycache__/testlogoform.cpython-35.pyc
-upload/tests/__pycache__/testsettingsform.cpython-35.pyc
+upload/__pycache__
+upload/tests/__pycache__
