@@ -33,33 +33,6 @@ class LabelFactory():
 		im.save(fullpath)
 		self.print_label(fullpath)
 
-
-	def make_text_label(self,f):
-		font=ImageFont.truetype(self.filepath+"LibSerif.ttf", self.fontsize)
-		dc=dicom.read_file(f)
-		fields=SettingsField.objects.all()
-		labels=SettingsForm.dicom_fields
-		text=[]
-		for f in fields:
-			if f.enabled:
-				label=labels[f.setting_key]
-				text+=[[label,str(getattr(dc, f.setting_key)).replace('^',' ')]]
-	
-		im=Image.new("L",(self.width,self.height),"white")
-		i=0
-		draw=ImageDraw.Draw(im)
-		for k in text:
-			line=''
-			if k[0] not in self.no_print:
-				line+=k[0]+':'
-			line+=k[1]
-			draw.text((0,i),line,"black",font=font)
-			i+=self.fontsize
-	
-		fullpath=self.filepath+self.filename
-		im.save(fullpath)
-		self.print_label(fullpath)
-
 	def make_label_from_dict(self, d):
 		font=ImageFont.truetype(self.filepath+"LibSerif.ttf", self.fontsize)
 		fields=SettingsField.objects.all()
@@ -74,7 +47,11 @@ class LabelFactory():
 		i=0
 		draw=ImageDraw.Draw(im)
 		for k in text:
-			draw.text((0,i),k[0]+":"+k[1],"black",font=font)
+			line=''
+			if k[0] not in self.no_print:
+				line+=k[0]+':'
+			line+=k[1]
+			draw.text((0,i),line,"black",font=font)
 			i+=self.fontsize
 	
 		fullpath=self.filepath+self.filename
