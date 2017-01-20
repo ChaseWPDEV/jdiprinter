@@ -39,7 +39,7 @@ class LabelFactory():
 		labels=SettingsForm.dicom_fields
 		text=[]
 		for f in fields:
-			if f.enabled and d[f.setting_key]:
+			if f.enabled and (f.setting_key in d) and d[f.setting_key]:
 				label=labels[f.setting_key]
 				text+=[[label,d[f.setting_key].replace('^',' ')]]
 	
