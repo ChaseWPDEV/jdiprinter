@@ -17,7 +17,7 @@ class LabelFactory():
 	filepath="/var/www/html/media/"
 	filename="output.png"
 	binname="output.bin"
-	no_print=['Patient Name']
+	no_print=['Patient Name', 'Institution Name']
 
 	def make_logo_label(self):
 		if ImageLogo.objects.filter(zero=0).count()==0:
