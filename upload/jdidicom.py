@@ -18,12 +18,21 @@ class JDIAE(AE):
 		self.network_timeout=0
 		self.last_pt=None
 
+	def _cleanup_associations(self):
+		super(JDIAE, self)._cleanup_associations()
+		if len(self.active_associations)==0:
+			self.last_pt=None
+
 	def on_c_store(self, dataset):
 		success=0x0000
+		if self.last_pt is not None:
+			return success
+
 		ds=FileDataset('/tmp/1.dcm',dataset)
 		ds.save_as('/tmp/1.dcm')
 		dc=pdc.read_file('/tmp/1.dcm', force=True)
 		os.remove('/tmp/1.dcm')
+
 		if dc.PatientName==self.last_pt:
 			return success
 		else:
