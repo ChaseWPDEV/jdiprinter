@@ -9,7 +9,7 @@ from upload.views import logo
 
 class LogoFormTestCase(TestCase):
 	def setUp(self):
-		self.filepath='/home/chasegru/localdj/dcprinter/media/smallacorn.png'
+		self.filepath='/home/chasegru/JDI/dcprinter/media/smallacorn.png'
 		self.filename='smallacorn.png'
 		self.factory=RequestFactory()
 	
@@ -25,7 +25,8 @@ class LogoFormTestCase(TestCase):
 		il=ImageLogo(zero=0)
 		il.image.name=self.filename
 		il.save()
-
+		print(il.image.path)
+		print(self.filepath)
 		self.assertTrue(il.image.path==self.filepath)
 
 	def test_logo_form(self):
