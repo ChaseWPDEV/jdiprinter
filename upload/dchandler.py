@@ -24,8 +24,8 @@ class LabelFactory():
 
 	def make_logo_label(self):
 		if ImageLogo.objects.filter(zero=0).count()==0:
-			return
-		
+			return	
+
 		fullpath=LabelData.filepath+LabelData.name
 		self.print_label(fullpath)
 
