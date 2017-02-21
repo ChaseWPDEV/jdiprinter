@@ -31,7 +31,7 @@ class LogoForm(forms.Form):
 		im=Image.new("L",(LabelData.width,LabelData.height),"white")
 		logosize=LabelData.width, LabelData.height
 		logo.thumbnail(logosize, Image.ANTIALIAS)
-		logox=int(LabelData.width/2)-int(logo.size[1]/2)
+		logox=int(LabelData.width/2)-int(logo.size[0]/2)
 		im.paste(logo,(logox,0))
 		fullpath=LabelData.filepath+LabelData.name
 		im.save(fullpath)
