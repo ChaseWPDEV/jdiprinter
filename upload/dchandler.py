@@ -18,13 +18,13 @@ class LabelFactory():
 	filename="output.png"
 	binname="output.bin"
 	no_print=['Patient Name', 'Institution Name']
-	mode="1"
+	mode="L"
 
 	def make_logo_label(self):
 		if ImageLogo.objects.filter(zero=0).count()==0:
 			return
 		il=ImageLogo.objects.get(zero=0)
-		logo=Image.open(il.image.path).convert(mode=self.mode,dither=Image.FLOYDSTEINBERG)
+		logo=Image.open(il.image.path).convert(mode=self.mode)
 		im=Image.new(self.mode,(self.width,self.height),"white")
 		logosize=self.height, self.width
 		logo.thumbnail(logosize, Image.ANTIALIAS)
