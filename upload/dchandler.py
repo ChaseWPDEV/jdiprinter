@@ -7,14 +7,16 @@ from .models import SettingsField, ImageLogo
 from .settings import SettingsForm
 import pydicom as dicom
 
+import .labeldata as label
+
 from PIL import Image, ImageFont, ImageDraw
 
 class LabelFactory():
-	width=696
-	height=306
-	fontsize=50
-	whitespace=10
-	filepath="/var/www/html/media/"
+	#width=696
+	#height=306
+	#fontsize=50
+	#whitespace=10
+	#filepath="/var/www/html/media/"
 	filename="output.png"
 	binname="output.bin"
 	no_print=['Patient Name', 'Institution Name']
@@ -25,17 +27,17 @@ class LabelFactory():
 			return
 		il=ImageLogo.objects.get(zero=0)
 		logo=Image.open(il.image.path).convert(mode=self.mode)
-		im=Image.new(self.mode,(self.width,self.height),"white")
-		logosize=self.height, self.width
+		im=Image.new(self.mode,(label.width,label.height),"white")
+		logosize=label.height, label.width
 		logo.thumbnail(logosize, Image.ANTIALIAS)
-		logox=int(self.width/2)-int(logo.size[1]/2)
+		logox=int(label.width/2)-int(logo.size[1]/2)
 		im.paste(logo,(logox,0))
-		fullpath=self.filepath+self.filename
+		fullpath=label.filepath+self.filename
 		im.save(fullpath)
 		self.print_label(fullpath)
 
 	def make_label_from_dict(self, d):
-		font=ImageFont.truetype(self.filepath+"LibSerif.ttf", self.fontsize)
+		font=ImageFont.truetype(label.filepath+"LibSerif.ttf", label.fontsize)
 		fields=SettingsField.objects.all()
 		labels=SettingsForm.dicom_fields
 		text=[]
@@ -44,7 +46,7 @@ class LabelFactory():
 				label=labels[f.setting_key]
 				text+=[[label,d[f.setting_key].replace('^',' ')]]
 	
-		im=Image.new(self.mode,(self.width,self.height),"white")
+		im=Image.new(self.mode,(label.width,label.height),"white")
 		i=0
 		draw=ImageDraw.Draw(im)
 		for k in text:
@@ -53,9 +55,9 @@ class LabelFactory():
 				line+=k[0]+':'
 			line+=k[1]
 			draw.text((0,i),line,"black",font=font)
-			i+=self.fontsize
+			i+=label.fontsize
 	
-		fullpath=self.filepath+self.filename
+		fullpath=label.filepath+self.filename
 		im.save(fullpath)
 		self.print_label(fullpath)
 		return len(text)
@@ -65,7 +67,7 @@ class LabelFactory():
 		model="QL-700"
 		label_size="62"
 		rotate="0"
-		bin_file=self.filepath+self.binname
+		bin_file=label.filepath+self.binname
 		command="brother_ql_create"
 		command+=" --model "+model
 		command+=" --label-size "+label_size

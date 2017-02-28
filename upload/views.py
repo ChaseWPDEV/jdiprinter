@@ -13,7 +13,8 @@ from django.urls import reverse
 from .form import DCPUploadFileForm
 from .dchandler import process_upload, get_active_fields, LabelFactory
 
-from .settings import SettingsForm, LogoForm
+from .settings import SettingsForm
+from .logoform import LogoForm
 from .models import ImageLogo
 
 import random
