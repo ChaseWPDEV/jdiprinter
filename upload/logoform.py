@@ -29,7 +29,7 @@ class LogoForm(forms.Form):
 			logo=logo.resize(new_size, resample=self.resize_method)
 
 		im=Image.new("L",(label.width,label.height),"white")
-		logosize=self.width, self.height
+		logosize=label.width, label.height
 		logo.thumbnail(logosize, Image.ANTIALIAS)
 		logox=int(label.width/2)-int(logo.size[1]/2)
 		im.paste(logo,(logox,0))
