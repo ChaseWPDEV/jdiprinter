@@ -7,7 +7,7 @@ from .models import SettingsField, ImageLogo
 from .settings import SettingsForm
 import pydicom as dicom
 
-from . import labeldata as label
+from .labeldata import LabelData
 
 from PIL import Image, ImageFont, ImageDraw
 
@@ -26,12 +26,12 @@ class LabelFactory():
 		if ImageLogo.objects.filter(zero=0).count()==0:
 			return
 		
-		fullpath=label.filepath+label.filename
+		fullpath=LabelData.filepath+LabelData.filename
 		im.save(fullpath)
 		self.print_label(fullpath)
 
-	def make_label_from_dict(self, d, label=label):
-		font=ImageFont.truetype(label.filepath+"LibSerif.ttf", label.fontsize)
+	def make_label_from_dict(self, d):
+		font=ImageFont.truetype(LabelData.filepath+"LibSerif.ttf", self.LabelData.fontsize)
 		fields=SettingsField.objects.all()
 		labels=SettingsForm.dicom_fields
 		text=[]
@@ -40,7 +40,7 @@ class LabelFactory():
 				label=labels[f.setting_key]
 				text+=[[label,d[f.setting_key].replace('^',' ')]]
 	
-		im=Image.new(self.mode,(label.width,label.height),"white")
+		im=Image.new(self.mode,(LabelData.width,LabelData.height),"white")
 		i=0
 		draw=ImageDraw.Draw(im)
 		for k in text:
@@ -49,9 +49,9 @@ class LabelFactory():
 				line+=k[0]+':'
 			line+=k[1]
 			draw.text((0,i),line,"black",font=font)
-			i+=label.fontsize
+			i+=LabelData.fontsize
 	
-		fullpath=label.filepath+self.filename
+		fullpath=LabelData.filepath+self.filename
 		im.save(fullpath)
 		self.print_label(fullpath)
 		return len(text)
@@ -61,7 +61,7 @@ class LabelFactory():
 		model="QL-700"
 		label_size="62"
 		rotate="0"
-		bin_file=label.filepath+self.binname
+		bin_file=LabelData.filepath+self.binname
 		command="brother_ql_create"
 		command+=" --model "+model
 		command+=" --label-size "+label_size

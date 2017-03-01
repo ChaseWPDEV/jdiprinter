@@ -1,14 +1,14 @@
 
 from .models import SettingsField, ImageLogo
 from .dchandler import LabelFactory
-from . import labeldata as label
+from .labeldata as LabelData
 
 from PIL import Image
 from django import forms
 
 class LogoForm(forms.Form):
 	logo=forms.FileField(required=False)
-	aspect=label.width/label.height
+	aspect=LabelData.width/LabelData.height
 	resize_method=Image.LANCZOS
 	
 
@@ -16,28 +16,28 @@ class LogoForm(forms.Form):
 		logo=Image.open(f)
 		
 		#resize routine
-		if logo.size[0]<label.width and logo.size[1]<label.height:
+		if logo.size[0]<LabelData.width and logo.size[1]<LabelData.height:
 			logo_aspect=logo.size[0]/logo.size[1]
 			if logo_aspect>=self.aspect:
 				#resize to width
-				new_height=int(label.width/logo_aspect)
-				new_size=(label.width, new_height)
+				new_height=int(LabelData.width/logo_aspect)
+				new_size=(LabelData.width, new_height)
 			else:
 				#resize to height
-				new_width=int(label.height*logo_aspect)
-				new_size=(new_width, label.height)
+				new_width=int(LabelData.height*logo_aspect)
+				new_size=(new_width, LabelData.height)
 			logo=logo.resize(new_size, resample=self.resize_method)
 
-		im=Image.new("L",(label.width,label.height),"white")
-		logosize=label.width, label.height
+		im=Image.new("L",(LabelData.width,LabelData.height),"white")
+		logosize=LabelData.width, LabelData.height
 		logo.thumbnail(logosize, Image.ANTIALIAS)
-		logox=int(label.width/2)-int(logo.size[1]/2)
+		logox=int(LabelData.width/2)-int(logo.size[1]/2)
 		im.paste(logo,(logox,0))
-		fullpath=label.filepath+label.name
+		fullpath=LabelData.filepath+LabelData.name
 		im.save(fullpath)
 
 		il=ImageLogo(zero=0)
-		il.image.name=label.name
+		il.image.name=LabelData.name
 		il.save()
 
 	#custom save method with hard coded "logo" name
