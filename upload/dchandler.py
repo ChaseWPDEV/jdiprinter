@@ -26,7 +26,7 @@ class LabelFactory():
 		if ImageLogo.objects.filter(zero=0).count()==0:
 			return
 		
-		fullpath=LabelData.filepath+LabelData.filename
+		fullpath=LabelData.filepath+LabelData.name
 		im.save(fullpath)
 		self.print_label(fullpath)
 
