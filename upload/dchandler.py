@@ -27,7 +27,6 @@ class LabelFactory():
 			return
 		
 		fullpath=LabelData.filepath+LabelData.name
-		im.save(fullpath)
 		self.print_label(fullpath)
 
 	def make_label_from_dict(self, d):
