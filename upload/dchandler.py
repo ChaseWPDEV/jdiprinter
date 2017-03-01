@@ -22,7 +22,7 @@ class LabelFactory():
 	no_print=['Patient Name', 'Institution Name']
 	mode="L"
 
-	def make_logo_label(self, label=label):
+	def make_logo_label(self):
 		if ImageLogo.objects.filter(zero=0).count()==0:
 			return
 		
