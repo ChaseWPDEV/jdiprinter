@@ -20,11 +20,11 @@ class LogoForm(forms.Form):
 			logo_aspect=logo.size[0]/logo.size[1]
 			if logo_aspect>=self.aspect:
 				#resize to width
-				new_height=label.width/logo_aspect
+				new_height=int(label.width/logo_aspect)
 				new_size=(label.width, new_height)
 			else:
 				#resize to height
-				new_width=label.height*logo_aspect
+				new_width=int(label.height*logo_aspect)
 				new_size=(new_width, label.height)
 			logo=logo.resize(new_size, resample=self.resize_method)
 
