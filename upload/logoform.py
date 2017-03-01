@@ -10,7 +10,7 @@ class LogoForm(forms.Form):
 	logo=forms.FileField(required=False)
 	aspect=label.width/label.height
 	resize_method=Image.LANCZOS
-	name="logo.jpg"
+	
 
 	def save(self,f):
 		logo=Image.open(f)
@@ -33,11 +33,11 @@ class LogoForm(forms.Form):
 		logo.thumbnail(logosize, Image.ANTIALIAS)
 		logox=int(label.width/2)-int(logo.size[1]/2)
 		im.paste(logo,(logox,0))
-		fullpath=label.filepath+self.name
+		fullpath=label.filepath+label.name
 		im.save(fullpath)
 
 		il=ImageLogo(zero=0)
-		il.image.name=self.name
+		il.image.name=label.name
 		il.save()
 
 	#custom save method with hard coded "logo" name

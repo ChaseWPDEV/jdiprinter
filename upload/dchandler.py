@@ -25,14 +25,8 @@ class LabelFactory():
 	def make_logo_label(self):
 		if ImageLogo.objects.filter(zero=0).count()==0:
 			return
-		il=ImageLogo.objects.get(zero=0)
-		logo=Image.open(il.image.path).convert(mode=self.mode)
-		im=Image.new(self.mode,(label.width,label.height),"white")
-		logosize=label.height, label.width
-		logo.thumbnail(logosize, Image.ANTIALIAS)
-		logox=int(label.width/2)-int(logo.size[1]/2)
-		im.paste(logo,(logox,0))
-		fullpath=label.filepath+self.filename
+		
+		fullpath=label.filepath+label.filename
 		im.save(fullpath)
 		self.print_label(fullpath)
 
