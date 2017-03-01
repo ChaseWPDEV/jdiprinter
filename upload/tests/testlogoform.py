@@ -1,7 +1,7 @@
 
 from django.test import TestCase, RequestFactory
 
-from upload.settings import LogoForm
+from upload.logoform import LogoForm
 from upload.models import ImageLogo
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.core.files import File

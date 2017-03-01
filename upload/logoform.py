@@ -1,9 +1,10 @@
 
 from .models import SettingsField, ImageLogo
 from .dchandler import LabelFactory
-import .labeldata as label
+from . import labeldata as label
 
 from PIL import Image
+from django import forms
 
 class LogoForm(forms.Form):
 	logo=forms.FileField(required=False)
@@ -27,7 +28,7 @@ class LogoForm(forms.Form):
 				new_size=(new_width, label.height)
 			logo=logo.resize(new_size, resample=self.resize_method)
 
-		im=Image.new(mode="L",(self.width,self.height),"white")
+		im=Image.new("L",(label.width,label.height),"white")
 		logosize=self.width, self.height
 		logo.thumbnail(logosize, Image.ANTIALIAS)
 		logox=int(label.width/2)-int(logo.size[1]/2)

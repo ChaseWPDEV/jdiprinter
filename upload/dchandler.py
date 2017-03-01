@@ -7,7 +7,7 @@ from .models import SettingsField, ImageLogo
 from .settings import SettingsForm
 import pydicom as dicom
 
-import .labeldata as label
+from . import labeldata as label
 
 from PIL import Image, ImageFont, ImageDraw
 
