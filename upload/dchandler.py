@@ -31,7 +31,7 @@ class LabelFactory():
 		self.print_label(fullpath)
 
 	def make_label_from_dict(self, d):
-		font=ImageFont.truetype(LabelData.filepath+"LibSerif.ttf", self.LabelData.fontsize)
+		font=ImageFont.truetype(LabelData.filepath+"LibSerif.ttf", LabelData.fontsize)
 		fields=SettingsField.objects.all()
 		labels=SettingsForm.dicom_fields
 		text=[]

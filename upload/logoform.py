@@ -1,7 +1,7 @@
 
 from .models import SettingsField, ImageLogo
 from .dchandler import LabelFactory
-from .labeldata as LabelData
+from .labeldata import LabelData
 
 from PIL import Image
 from django import forms
