@@ -22,7 +22,7 @@ class LabelFactory():
 	no_print=['Patient Name', 'Institution Name']
 	mode="L"
 
-	def make_logo_label(self):
+	def make_logo_label(self, label=label):
 		if ImageLogo.objects.filter(zero=0).count()==0:
 			return
 		
@@ -30,7 +30,7 @@ class LabelFactory():
 		im.save(fullpath)
 		self.print_label(fullpath)
 
-	def make_label_from_dict(self, d):
+	def make_label_from_dict(self, d, label=label):
 		font=ImageFont.truetype(label.filepath+"LibSerif.ttf", label.fontsize)
 		fields=SettingsField.objects.all()
 		labels=SettingsForm.dicom_fields
