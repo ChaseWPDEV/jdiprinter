@@ -53,6 +53,7 @@ class LabelFactory():
 		fullpath=LabelData.filepath+self.filename
 		im.save(fullpath)
 		self.print_label(fullpath)
+		os.remove(fullpath)
 		return len(text)
 		
 		
@@ -70,7 +71,6 @@ class LabelFactory():
 		dev="/dev/usb/lp0"
 		print_com="cat "+bin_file+" > "+dev
 		os.system(print_com)
-		os.remove(filename)
 		os.remove(bin_file)
 		
 
